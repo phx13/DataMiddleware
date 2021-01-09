@@ -1,0 +1,157 @@
+﻿<windows:WindowBase xmlns:windows="clr-namespace:DataMiddleware.Windows"
+                    x:Class="DataMiddleware.Windows.MainWindow"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    WindowStartupLocation="CenterScreen"
+                    AllowsTransparency="True"
+                    Title="数字冰雹 - 数据中间件"
+                    Width="1366"
+                    Height="768"
+                    WindowState="Normal"
+                    WindowStyle="None"
+                    ResizeMode="NoResize"
+                    Background="Transparent">
+    <windows:WindowBase.Resources>
+        <Style x:Key="TitleButtonStyle"
+               TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="Bak"
+                              Background="#2D2D30">
+                            <TextBlock Text="{TemplateBinding Content}"
+                                       FontSize="17"
+                                       FontFamily="微软雅黑"
+                                       Foreground="#F1F1F1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="true">
+                                <Setter Property="Background"
+                                        Value="#3F3F41"
+                                        TargetName="Bak" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ListBoxItemStyle"
+               TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border BorderThickness="2"
+                                BorderBrush="Transparent"
+                                x:Name="B1">
+                            <TextBlock ToolTip="{Binding Mode=OneWay}"
+                                       Text="{Binding Mode=OneWay}"
+                                       Foreground="#4EC9B0"
+                                       Margin="10,3"
+                                       FontSize="15"
+                                       FontFamily="Courier New"
+                                       Background="Transparent"
+                                       Cursor="Hand" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="true">
+                                <Setter TargetName="B1"
+                                        Property="BorderBrush"
+                                        Value="#464646"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </windows:WindowBase.Resources>
+    <Border BorderThickness="1"
+            BorderBrush="#0079CB"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"
+                  Height="35"
+                  HorizontalAlignment="Stretch"
+                  MouseDown="Grid_MouseDown"
+                  Background="#2D2D30">
+                <Image Source="../Resources/Images/logo.png"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Height="20"
+                       Width="20"
+                       Margin="13,0,0,0" />
+                <TextBlock Text="数字冰雹 - 数据中间件"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           FontSize="12"
+                           Foreground="#999999"
+                           Margin="45,0,0,0"
+                           FontFamily="微软雅黑"
+                           TextAlignment="Center" />
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Stretch">
+                    <Button x:Name="MinButton"
+                            Height="35"
+                            Width="45"
+                            Content="-"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource TitleButtonStyle}"
+                            ToolTip="最小化到托盘"
+                            Click="MinButton_Click" />
+                    <Button x:Name="CloButton"
+                            Height="35"
+                            Width="45"
+                            Content="×"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource TitleButtonStyle}"
+                            ToolTip="退出程序"
+                            Click="CloButton_Click" />
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1"
+                  Background="#1E1E1E"
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch">
+                <ListBox Grid.Column="0"
+                         Name="ListBox1"
+                         Background="Transparent"
+                         ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                         ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                         ScrollViewer.ScrollChanged="ListBox1_OnScrollChanged"
+                         VirtualizingStackPanel.IsVirtualizing="True"
+                         ItemContainerStyle="{DynamicResource ListBoxItemStyle}" />
+            </Grid>
+            <Grid Grid.Row="2"
+                  HorizontalAlignment="Stretch"
+                  Height="26"
+                  Background="#0079CB">
+                <Image Source="../Resources/Images/StateIcon.png"
+                       Height="12"
+                       Width="17"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="5,0,0,0" />
+                <TextBlock Text="就绪."
+                           FontSize="12"
+                           FontFamily="微软雅黑"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Foreground="White"
+                           Margin="30,0,0,0" />
+            </Grid>
+        </Grid>
+    </Border>
+</windows:WindowBase>
